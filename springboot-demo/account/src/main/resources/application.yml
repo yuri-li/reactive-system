@@ -1,0 +1,6 @@
+spring:
+  rsocket:
+    server:
+      transport: websocket
+      port: 6000
+      mapping-path: /account
