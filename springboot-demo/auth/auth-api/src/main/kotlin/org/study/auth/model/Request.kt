@@ -1,7 +1,18 @@
 package org.study.auth.model
 
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.stereotype.Component
+
+
+@Component
+@ConfigurationProperties("security-settings")
+data class SecuritySettings(
+    var authClient: AuthClient? = null,
+    var permitRoutes: Map<String, String>? = null,
+)
+
 /**
- * 比如account，grade等服务，要访问auth，首先得注册client，拿到id，secret后，再访问
+ * 比如account，score等服务，要访问auth，首先得注册client，拿到id，secret后，再访问
  */
 data class AuthClient(
     var name: String = "",

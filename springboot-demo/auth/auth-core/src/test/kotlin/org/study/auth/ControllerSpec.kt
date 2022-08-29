@@ -13,22 +13,17 @@ import org.study.auth.model.token.UserAndToken
 import reactor.kotlin.test.test
 
 @SpringBootTest
-class ControllerSpec(val requester: RSocketRequester) : StringSpec({
+class ControllerSpec(val requester: RSocketRequester, val settings: SecuritySettings) : StringSpec({
     "login" {
         requester
             .route("anonymous.auth.generate.token")
             .data(
                 GenerateToken(
-                    AuthClient(
-                        name = "auth-core",
-                        id = "43e8334a-b9b5-44bd-92cd-8afefa021bae",
-                        secret = "yV!wj?aI.Kc?3BZZd[BJh=Z"
-                    ),
-                    Teacher(
-                        "0295006e-6444-45aa-97f4-e33be8b5ad8e",
+                    settings.authClient!!,
+                    Student(
+                        "0295002e-6444-45aa-97f4-e33be8b5ad8e",
                         "0285006e-6444-45aa-97f4-e33be8b5ad8e",
-                        "王老师",
-                        Phone(phoneNo = "13753536223"),
+                        "小明",
                     )
                 )
             )
@@ -36,22 +31,12 @@ class ControllerSpec(val requester: RSocketRequester) : StringSpec({
             .test()
             .expectNextMatches {
                 log.info(it.accessToken.id)
-                (it.user as Teacher).username == "王老师"
+                (it.user as Student).username == "小明"
             }
             .expectComplete()
             .verify()
     }
     "feign" {
-        /*val securityToken = SpringContextHolder.getBean(AuthApi::class.java).getAuthentication(
-            GetAuthentication(
-                AuthClient(
-                    name = "auth-core",
-                    id = "43e8334a-b9b5-44bd-92cd-8afefa021bae",
-                    secret = "yV!wj?aI.Kc?3BZZd[BJh=Z"
-                ),
-                "a40bf7d5-956e-4048-8f31-d6fc8f8acb6a"
-            )
-        ).toBearerTokenAuthentication()*/
         requester
             .route("anonymous.auth.get.authentication")
             .data(
@@ -61,7 +46,8 @@ class ControllerSpec(val requester: RSocketRequester) : StringSpec({
                         id = "43e8334a-b9b5-44bd-92cd-8afefa021bae",
                         secret = "yV!wj?aI.Kc?3BZZd[BJh=Z"
                     ),
-                    "a40bf7d5-956e-4048-8f31-d6fc8f8acb6a"
+                    "bd0e9c21-4522-433e-b281-5f70980d906e",
+                    //"a40bf7d5-956e-4048-8f31-d6fc8f8acb6a"
                 )
             )
             .retrieveMono(SecurityToken::class.java)

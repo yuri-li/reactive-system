@@ -24,6 +24,7 @@ import java.util.*
             transport = "ws",
             host = "localhost",
             port = 6001,
+            mappingPath = "/auth",
             classes = [AuthApi::class]
         )
     ]

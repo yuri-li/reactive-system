@@ -13,5 +13,7 @@ class RSocketConfig {
         @Suppress("SpringJavaInjectionPointsAutowiringInspection") builder: RSocketRequester.Builder,
         @Value("\${spring.rsocket.server.port}") port: Int,
         @Value("\${spring.rsocket.server.mapping-path}") mappingPath:String,
-    ): RSocketRequester = builder.websocket(URI.create("ws://localhost:${port}/${mappingPath}"))
+    ): RSocketRequester =
+//        builder.tcp("localhost", port)
+        builder.websocket(URI.create("ws://localhost:${port}/${mappingPath}"))
 }

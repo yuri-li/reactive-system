@@ -39,5 +39,3 @@ OK
 # 6 禁止匿名用户访问
 127.0.0.1:6379> acl setuser default off -@all
 ```
-
-

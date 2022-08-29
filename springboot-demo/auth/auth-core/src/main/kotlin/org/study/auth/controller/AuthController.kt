@@ -27,8 +27,8 @@ class AuthController(
     @MessageMapping("anonymous.auth.generate.token")
     suspend fun generateToken(request: GenerateToken): UserAndToken {
         clientService.verify(request.client)
-
         val role = request.user.findRole()
+
         val cache = relationService.findUserAndToken(request.user.id, role)
         if (cache != null) {
             return cache

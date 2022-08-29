@@ -55,7 +55,7 @@ tasks {
     }
     withType<Wrapper> {
         distributionType = Wrapper.DistributionType.BIN
-        gradleVersion = "7.4.1"
+        gradleVersion = "7.5.1"
     }
 }
 val sourcesJar by tasks.registering(Jar::class) {

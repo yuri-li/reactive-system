@@ -2,6 +2,7 @@ spring:
   rsocket:
     server:
       transport: websocket
+#      transport: tcp
       port: 6001
       mapping-path: /auth
   redis:
@@ -12,9 +13,9 @@ spring:
 
 security-settings:
   auth-client:
-    name: auth-core
-    id: 43e8334a-b9b5-44bd-92cd-8afefa021bae
-    secret: "yV!wj?aI.Kc?3BZZd[BJh=Z"
+    name: ${authClientName}
+    id: ${authClientId}
+    secret: ${authClientPassword}
   permit-routes:
     generateToken: anonymous.auth.generate.token
     getAuthentication: anonymous.auth.get.authentication

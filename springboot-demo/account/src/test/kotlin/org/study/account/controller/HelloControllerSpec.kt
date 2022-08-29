@@ -6,6 +6,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.string
 import io.kotest.property.forAll
+import io.rsocket.metadata.WellKnownMimeType
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.joinAll
@@ -14,6 +15,13 @@ import kotlinx.coroutines.reactive.awaitFirst
 import org.slf4j.LoggerFactory
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.messaging.rsocket.RSocketRequester
+import org.springframework.security.rsocket.metadata.BearerTokenMetadata
+import org.springframework.util.MimeTypeUtils
+import org.study.auth.model.AuthClient
+import org.study.auth.model.DeleteAuthentication
+import org.study.auth.model.Role
+import org.study.auth.model.Student
+import reactor.kotlin.test.test
 import kotlin.system.measureTimeMillis
 
 
@@ -44,9 +52,23 @@ class HelloControllerSpec(val requester: RSocketRequester) : StringSpec({
     "重复执行100_000次" {
         times(requester, 100_000).shouldBeBetween(5000, 10_000)
     }
+    "token" {
+        requester
+            .route("check.grades")
+            .metadata(BearerTokenMetadata("f6ed99e2-7db6-4f87-b7b2-2c00bf649edf"), MIME_TYPE)
+            .retrieveMono(Int::class.java)
+            .test()
+            .expectNextMatches {
+                it == 100
+            }
+            .expectComplete()
+            .verify()
+    }
 }) {
     companion object {
         private val log = LoggerFactory.getLogger(this::class.java)
+        val MIME_TYPE = MimeTypeUtils.parseMimeType(WellKnownMimeType.MESSAGE_RSOCKET_AUTHENTICATION.string)
+
         private suspend fun times(requester: RSocketRequester, times: Int): Long = coroutineScope {
             measureTimeMillis {
                 val list = mutableListOf<Job>()

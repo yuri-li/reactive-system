@@ -1,7 +1,6 @@
 package org.study.auth.config
 
 import kotlinx.coroutines.reactor.mono
-import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.messaging.rsocket.RSocketStrategies
@@ -11,46 +10,27 @@ import org.springframework.security.config.annotation.rsocket.EnableRSocketSecur
 import org.springframework.security.config.annotation.rsocket.RSocketSecurity
 import org.springframework.security.messaging.handler.invocation.reactive.AuthenticationPrincipalArgumentResolver
 import org.springframework.security.rsocket.core.PayloadSocketAcceptorInterceptor
-import org.springframework.stereotype.Component
 import org.study.auth.AuthApi
-import org.study.auth.model.AuthClient
 import org.study.auth.model.GetAuthentication
+import org.study.auth.model.SecuritySettings
 
-
-@Component
-@ConfigurationProperties("security-settings")
-data class SecuritySettings(
-    var authClient: AuthClient? = null,
-    var permitRoutes: Map<String, String>? = null,
-)
-
-@Suppress("SpringJavaInjectionPointsAutowiringInspection")
 @Configuration
 @EnableRSocketSecurity
 @EnableReactiveMethodSecurity
-class RSocketSecurityConfig(val settings: SecuritySettings, val authApi: AuthApi) {
-
-    /*@Bean
-    fun rSocketStrategies(): RSocketStrategies {
-        return RSocketStrategies.builder()
-            .encoders {
-                it.add(BearerTokenAuthenticationEncoder())
-                it.add(Jackson2CborEncoder())
-                it.add(Jackson2JsonEncoder())
-            }.decoders {
-                it.add(Jackson2CborDecoder())
-                it.add(Jackson2JsonDecoder())
-            }.build()
-    }*/
+class RSocketSecurityConfig {
 
     @Bean
-    fun messageHandler(strategies: RSocketStrategies) = RSocketMessageHandler().apply {
+    fun messageHandler(@Suppress("SpringJavaInjectionPointsAutowiringInspection") strategies: RSocketStrategies) = RSocketMessageHandler().apply {
         argumentResolverConfigurer.addCustomResolver(AuthenticationPrincipalArgumentResolver())
         rSocketStrategies = strategies
     }
 
     @Bean
-    fun authorization(security: RSocketSecurity): PayloadSocketAcceptorInterceptor =
+    fun authorization(
+        settings: SecuritySettings,
+        @Suppress("SpringJavaInjectionPointsAutowiringInspection") authApi: AuthApi,
+        security: RSocketSecurity
+    ): PayloadSocketAcceptorInterceptor =
         security.authorizePayload { authorize: RSocketSecurity.AuthorizePayloadsSpec ->
             settings.permitRoutes!!.values.fold(authorize) { spec, item ->
                 spec.route(item).permitAll()

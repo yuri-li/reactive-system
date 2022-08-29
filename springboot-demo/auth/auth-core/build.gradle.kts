@@ -33,12 +33,18 @@ dependencies {
     val kotestSpringVersion = "1.1.2"
 
     implementation("org.study:common:0.0.1")
-    implementation("org.study:auth-api:0.0.1")
+    implementation("org.study:auth-api:0.0.1"){
+        exclude(group = "com.fasterxml.jackson.datatype", module = "jackson-datatype-jsr310")
+    }
     implementation("org.study:r-feign:0.0.1")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 
-    implementation("org.springframework.boot:spring-boot-starter-rsocket")
+    implementation("org.springframework.boot:spring-boot-starter-rsocket") {
+        exclude(group = "com.fasterxml.jackson.datatype", module = "jackson-datatype-jsr310")
+    }
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3-fixed")
+
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -78,7 +84,7 @@ tasks {
     }
     withType<Wrapper> {
         distributionType = Wrapper.DistributionType.BIN
-        gradleVersion = "7.4.1"
+        gradleVersion = "7.5.1"
     }
 
     withType<ProcessResources> {
@@ -89,6 +95,7 @@ tasks {
 }
 fun rsocketMavenRepository(repositoryHandler: RepositoryHandler) = repositoryHandler.maven {
     setUrl(nexus3Url)
+    artifactUrls(nexus3Url)
     isAllowInsecureProtocol = true
     credentials {
         username = nexus3Username

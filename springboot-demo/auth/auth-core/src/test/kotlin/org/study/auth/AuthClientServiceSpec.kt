@@ -11,7 +11,7 @@ import org.study.auth.service.AuthClientService
 @SpringBootTest
 class AuthClientServiceSpec(val service: AuthClientService, val mapper: ObjectMapper) : StringSpec({
     "register client" {
-        val clientName = "score"
+        val clientName = "account-core"
         log.info("注册 client --- 开始")
         service.register(clientName)
         val client = service.findByName(clientName)!!

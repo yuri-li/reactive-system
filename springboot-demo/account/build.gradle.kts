@@ -27,6 +27,7 @@ repositories {
     mavenCentral()
     maven {
         setUrl(nexus3Url)
+        artifactUrls(nexus3Url)
         isAllowInsecureProtocol = true
         credentials {
             username = nexus3Username
@@ -38,11 +39,21 @@ repositories {
 dependencies {
     val kotestVersion = "5.4.2"
     val kotestSpringVersion = "1.1.2"
+    val postgresqlVersion = "0.8.12.RELEASE"
 //    val springmockkVersion = "3.1.1"
 
     implementation("org.study:common:0.0.1")
+    implementation("org.study:auth-api:0.0.1"){
+        exclude(group = "com.fasterxml.jackson.datatype", module = "jackson-datatype-jsr310")
+    }
+    implementation("org.study:r-feign:0.0.1")
 
-    implementation("org.springframework.boot:spring-boot-starter-rsocket")
+    annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
+
+    implementation("org.springframework.boot:spring-boot-starter-rsocket") {
+        exclude(group = "com.fasterxml.jackson.datatype", module = "jackson-datatype-jsr310")
+    }
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.3-fixed")
     implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
@@ -57,8 +68,8 @@ dependencies {
         exclude(module = "spring-web")
     }
 
-//    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-//    runtimeOnly("io.r2dbc:r2dbc-postgresql")
+    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    runtimeOnly("io.r2dbc:r2dbc-postgresql:$postgresqlVersion")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
@@ -85,5 +96,12 @@ tasks {
     withType<Wrapper> {
         distributionType = Wrapper.DistributionType.BIN
         gradleVersion = "7.5.1"
+    }
+
+    @Suppress("UnstableApiUsage")
+    withType<ProcessResources> {
+        filesMatching("**/application*.yml") {
+            expand(project.properties)
+        }
     }
 }
