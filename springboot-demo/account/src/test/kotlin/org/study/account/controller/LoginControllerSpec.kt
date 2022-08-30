@@ -37,7 +37,7 @@ class LoginControllerSpec(val requester: RSocketRequester) : StringSpec({
                     val response = requester
                         .route("anonymous.login")
                         .data(
-                            org.study.account.model.Schoolmaster.Login("user-${index + 1300}", "zg(?t;ED<R_WKW~GeX&(xQ2")
+                            org.study.account.model.Schoolmaster.Login("user-${index + 1}", "zg(?t;ED<R_WKW~GeX&(xQ2")
                         )
                         .retrieveMono(UserAndToken::class.java).awaitSingle()
                     log.info("username `${response.user.username}`, userId `${response.user.id}`, access token `${response.accessToken.id}`, refresh token `${response.refreshToken.id}`")

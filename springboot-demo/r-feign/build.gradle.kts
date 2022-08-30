@@ -36,7 +36,7 @@ dependencies {
         exclude(module = "spring-core")
         exclude(module = "spring-security-core")
     }
-    implementation("org.slf4j:slf4j-api:1.7.36")
+    implementation("org.slf4j:slf4j-api:2.0.0")
 }
 
 tasks {
