@@ -12,6 +12,7 @@ create table t_schoolmaster
 comment on table t_schoolmaster is '校长';
 
 -- 1. 检查表是否为空/10万条数据
+truncate table t_schoolmaster;
 select count(*) from t_schoolmaster;
 select * from t_schoolmaster limit 10;
 -- 2. 快速插入10万条测试数据

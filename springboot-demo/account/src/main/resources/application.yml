@@ -10,9 +10,8 @@ spring:
     username: ${dbUsername}
     password: ${dbPassword}
     pool:
-      enabled: true
-      initial-size: 10
-      max-size: 50
+      initial-size: 1
+      max-size: 3
 
 security-settings:
   auth-client:

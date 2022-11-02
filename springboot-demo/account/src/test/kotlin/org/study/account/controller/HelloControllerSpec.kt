@@ -17,10 +17,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.messaging.rsocket.RSocketRequester
 import org.springframework.security.rsocket.metadata.BearerTokenMetadata
 import org.springframework.util.MimeTypeUtils
-import org.study.auth.model.AuthClient
-import org.study.auth.model.DeleteAuthentication
-import org.study.auth.model.Role
-import org.study.auth.model.Student
 import reactor.kotlin.test.test
 import kotlin.system.measureTimeMillis
 
