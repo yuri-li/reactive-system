@@ -2,6 +2,7 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from "@/components/HelloWorld.vue"
+import ReverseString from "@/components/study/ReverseString.vue"
 </script>
 
 <template>
@@ -14,18 +15,41 @@ import HelloWorld from "@/components/HelloWorld.vue"
     </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
+  <ReverseString />
 </template>
 
-<style scoped>
+<style lang="scss">
 .logo {
   height: 6em;
   padding: 1.5em;
   will-change: filter;
+
+  &:hover {
+    filter: drop-shadow(0 0 2em #646CFFAA);
+  }
+  .vue{
+    &:hover {
+      filter: drop-shadow(0 0 2em #42B883AA);
+    }
+  }
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.btn {
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.success {
+  border-color: #04AA6D;
+  color: green;
+
+  &:hover {
+    background-color: #04AA6D;
+    color: white;
+  }
 }
 </style>
