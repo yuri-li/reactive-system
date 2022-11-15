@@ -2,7 +2,8 @@
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 import HelloWorld from "@/components/HelloWorld.vue"
-import ReverseString from "@/components/study/ReverseString.vue"
+import ReverseString from "@/components/ReverseString.vue"
+import MultiplicationTable from "@/components/multiplicationTable/Index.vue"
 </script>
 
 <template>
@@ -16,6 +17,7 @@ import ReverseString from "@/components/study/ReverseString.vue"
   </div>
   <HelloWorld msg="Vite + Vue" />
   <ReverseString />
+  <MultiplicationTable />
 </template>
 
 <style lang="scss">

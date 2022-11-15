@@ -25,6 +25,7 @@
     "vue"
   ],
   "globals": {
+    "defineOptions": "readonly",
     "defineProps": "readonly",
     "defineEmits": "readonly",
     "defineExpose": "readonly",
@@ -48,6 +49,7 @@
     "vue/max-attributes-per-line": "off",
     "vue/html-self-closing": "off",
     "vue/valid-template-root": "off",
+    "vue/mustache-interpolation-spacing": "off",
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-empty-function": "off",
     "quotes": [

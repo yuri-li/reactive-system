@@ -1,26 +1,29 @@
 /// <reference types="vitest" />
 // noinspection SpellCheckingInspection
 
-import {defineConfig} from "vite"
+import { defineConfig,splitVendorChunkPlugin } from "vite"
 import Vue from "@vitejs/plugin-vue"
-import {resolve} from "path"
+import { resolve } from "path"
+import VueMacros from "unplugin-vue-macros/vite"
+
 
 // https://vitejs.dev/config/
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-    plugins: [Vue()],
+    plugins: [
+        VueMacros({
+            plugins: {
+                vue: Vue({
+                    reactivityTransform: true
+                }),
+            },
+        }),
+        splitVendorChunkPlugin(),
+    ],
     build: {
         target: "esnext",
-        minify: false,
-        rollupOptions: {
-            output: {
-                manualChunks: (id) => {
-                    if (id.includes("node_modules")) {
-                        return "vendor"
-                    }
-                },
-            },
-        },
+        // minify: false,
+        // sourcemap: true,
     },
     resolve: {
         alias: {

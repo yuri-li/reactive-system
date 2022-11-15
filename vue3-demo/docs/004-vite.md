@@ -118,7 +118,7 @@ export default defineConfig({
 
 ## 7.1 浏览器的缓存
 
-静态资源，只要文件名称没有变化，浏览器就不会重新获取。所以，修改文件内容后，通常要清缓存，才会生效。
+若文件名称没有变，浏览器就不会重新获取。所以，修改文件内容后，通常要清缓存，才会生效。
 
 怎么解决呢？
 
@@ -130,7 +130,7 @@ vite打包生成的js/css/svg等文件，名称会添加随机字符串。只要
 
 将"node_modules"下的文件单独打包。
 
-因为依赖文件几乎不放生变化，所以，文件名也不会变化。从而让浏览器可以正确使用缓存中的文件。
+因为依赖文件几乎不变，所以，文件名也不会变。让浏览器使用缓存。
 
 > vite使用Rollup做打包的工作，所以，配置参数需要查看Rollup的文档。
 > 
@@ -144,25 +144,32 @@ vite打包生成的js/css/svg等文件，名称会添加随机字符串。只要
 /// <reference types="vitest" />
 // noinspection SpellCheckingInspection
 
-import {defineConfig} from "vite"
-import vue from "@vitejs/plugin-vue"
-import {resolve} from "path"
+import { defineConfig,splitVendorChunkPlugin } from "vite"
+import Vue from "@vitejs/plugin-vue"
+import { resolve } from "path"
+import VueMacros from "unplugin-vue-macros/vite"
 
 // https://vitejs.dev/config/
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
+    plugins: [
+        VueMacros({
+            plugins: {
+                vue: Vue({
+                    reactivityTransform: true
+                }),
+            },
+        }),
+        splitVendorChunkPlugin(),
+    ],
     build: {
         target: "esnext",
-        minify: false,
-        rollupOptions: {
-            output: {
-                manualChunks: (id) => {
-                    if (id.includes("node_modules")) {
-                        return "vendor"
-                    }
-                },
-            },
-        },
+    },
+    resolve: {
+        alias: {
+            "@": resolve(__dirname, "src/"),
+            "~": resolve(__dirname, "test/")
+        }
     },
     test: {
         globals: true,
@@ -172,7 +179,6 @@ export default defineConfig({
         },
         include: ["test/**/*.spec.ts"],
     },
-...
 })
 ```
 

@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "types": ["vitest/globals"],
+    "types": ["vitest/globals", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,

@@ -1,6 +1,6 @@
 import { describe } from "vitest"
 import {shallowMount} from "@vue/test-utils"
-import ReverseString from "@/components/study/ReverseString.vue"
+import ReverseString from "@/components/ReverseString.vue"
 
 describe("翻转字符串", () => {
     test("触发button 点击事件，观察点击前后message的值", async () => {
