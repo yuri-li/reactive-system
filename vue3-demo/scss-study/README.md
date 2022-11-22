@@ -24,89 +24,13 @@
 
 - `~`，代表“test/”目录
 
-# 4 scss
-
-## 4.1 清除默认样式
-
-### 4.1.1 main.scss
-
-```scss
-/* src/assets/css/main.scss */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-```
-
-### 4.1.2 App.vue
-
-```
-/* src/App.vue */
-
-<style lang="scss">
-@import "@/assets/css/main.scss";
-
-</style>
-```
-
-## 4.2 全局变量
-
-### 4.2.1 variable.scss
-
-```scss
-/* src/assets/css/variable.scss */
-@mixin flexContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-```
-
-### 4.2.2 vite.config.ts
-
-```
-css: {
-  preprocessorOptions: {
-    scss: {
-      additionalData: "@import \"@/assets/css/variable.scss\";"
-    }
-  }
-},
-```
-
-## 4.3 使用配置
-
-### 4.3.1 App.vue
-
-`index.html -> main.ts -> App.vue --> style(no scoped)`
-
-即，App.vue的css设置是全局的。所以，所有页面都会用到"@/assets/css/main.scss"
-
-### 4.3.2 `*.vue`
-
-```scss
-<style lang="scss" scoped>
-.container {
-  ...
-  @include flexContainer;
-  ...
-}
-</style>
-```
-
-## 4.4 intellij idea配置
-
-![](assets/2022-11-21-05-46-43-image.png)
-
-# 5 测试
+# 4 测试
 
 - 使用eslint检测代码
 - 使用vitest执行`test/HelloWorld.spec.ts`
 - 使用vitest检查测试覆盖率
 
-# 6 发布到npm repository
+# 5 发布到npm repository
 
 package.json配置的dependencies/devDependencies，都是大家开源的。怎么把自己做好的功能，发布到npm repository，让别人使用？
 
@@ -132,7 +56,7 @@ $ source ~/.zshrc
 $ yarn publish
 ```
 
-# 7 使用自己的模板创建项目
+# 6 使用自己的模板创建项目
 
 ```
 # 1 复制到本地（不要使用degit，多学了，也没啥用）

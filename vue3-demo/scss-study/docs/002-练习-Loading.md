@@ -1,32 +1,32 @@
-# 1 css-loading-button
+# 1 loading
 
-![](assets/css-button.gif)
+![](assets/Loading.gif)
 
-## 1.1 全局设置
+# 1 全局设置
 
-### 1.1.1 清除默认样式
+## 1.1 清除默认样式
 
 ```scss
 /* src/assets/css/main.scss */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 ```
 
-### 1.1.2 定义全局变量
+## 1.2 定义全局变量
 
 ```scss
 /* src/assets/css/variable.scss */
 @mixin flexContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+display: flex;
+justify-content: center;
+align-items: center;
 }
 ```
 
-### 1.1.3 App.vue
+## 1.3 App.vue
 
 页面框架
 
@@ -49,10 +49,9 @@ body {
   height: 100vh;
 }
 </style>
-
 ```
 
-## 1.2 Loading.vue
+# 2 Loading.vue
 
 ```
 <template>
