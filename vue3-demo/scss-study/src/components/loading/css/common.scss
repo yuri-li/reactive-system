@@ -1,0 +1,25 @@
+@mixin keyframeRotate($animation-name, $start, $end){
+  @keyframes #{$animation-name} {
+    0% {
+      transform: rotate($start);
+    }
+    100% {
+      transform: rotate($end);
+    }
+  }
+}
+@include keyframeRotate("forwardRotate", 0deg, 360deg);
+@include keyframeRotate("reverseRotate", 360deg, 0deg);
+
+@mixin colorHead($base-color){
+  background-color: $base-color;
+  box-shadow: 0 0 0 5px #{$base-color}33,
+  0 0 0 10px #{$base-color}22,
+  0 0 0 20px #{$base-color}11,
+  0 0 20px #{$base-color},
+  0 0 50px #{$base-color};
+}
+
+$default-color: #24ecff;
+$green-color: #93ff2d;
+$pink-color: #e41cf8;
