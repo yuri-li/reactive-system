@@ -1,7 +1,7 @@
 /// <reference types="vitest" />
 // noinspection SpellCheckingInspection
 
-import { defineConfig,splitVendorChunkPlugin } from "vite"
+import { defineConfig, splitVendorChunkPlugin } from "vite"
 import Vue from "@vitejs/plugin-vue"
 import { resolve } from "path"
 import VueMacros from "unplugin-vue-macros/vite"
