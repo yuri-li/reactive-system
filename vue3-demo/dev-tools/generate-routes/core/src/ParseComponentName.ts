@@ -1,20 +1,20 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { readdirSync, readFileSync } from "fs"
-import { isEmpty, upperFirst } from "lodash"
+import { readdirSync, readFileSync, } from "fs"
+import { isEmpty, upperFirst, } from "lodash"
 
 class ParseComponentName {
     _path: string | null = null
     _arr: string[] = []
 
-    toComponentName(path: string) {
-        this._path = path
+    toComponentName(fileFullPath: string) {
+        this._path = fileFullPath
         this._arr = this._path!.replace(/.*\/src\//, "/").split("/")
 
-        let componentName: string | null = null
+        let componentName: string | null
 
         componentName = this.customComponentName()
         if (isEmpty(componentName)) {
-            if (path.endsWith("Index.vue") || this.isContainIndexVue()) {
+            if (this._path!.endsWith("Index.vue") || this.isContainIndexVue()) {
                 componentName = this.parentDirAsComponentName()
             } else {
                 componentName = this.fileNameAsComponentName()

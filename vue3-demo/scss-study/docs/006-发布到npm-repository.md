@@ -1,6 +1,6 @@
 # 1 简介
 
-`package.json`配置的`dependencies/devDependencies`，都是大家开源的。怎么把自己做好的功能，发布到npm repository，让别人使用？
+怎么把自己做好的功能，发布到npm repository（让别人使用）？
 
 # 2 步骤
 

@@ -14,7 +14,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "preserve",
-    "types": ["vite/client", "node", "vitest/globals"],
+    "types": ["vitest/globals", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
     "lib": ["ESNext", "DOM"],
     "skipLibCheck": true,
     "noEmit": true,
@@ -27,7 +27,7 @@
     }
   },
   "include": [
-    "src/**/*.ts","src/**/*.d.ts",
+    "src/**/*.ts","src/**/*.d.ts","src/**/*.vue",
     "test/**/*.ts","test/**/*.d.ts"
   ],
   "exclude": ["node_modules", "dist"]

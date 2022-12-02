@@ -1,21 +1,17 @@
 {
-  "name": "generate-routes-yuri",
+  "name": "ts-lib",
   "private": false,
-  "version": "0.0.2",
+  "version": "0.0.9",
   "license": "MIT",
   "author": "yuri <javaliyuanyuan@163.com> (https://github.com/yuri-li)",
   "packageManager": "yarn@1.22.19",
-  "main": "dist/generate-routes-yuri.mjs",
-  "module": "dist/generate-routes-yuri.mjs",
+  "main": "dist/ts-lib.mjs",
+  "module": "dist/ts-lib.mjs",
   "types": "dist/index.d.ts",
-  "homepage": "https://github.com/yuri-li/reactive-system/tree/main/vue3-demo/dev-tools/generate-routes/core",
+  "homepage": "https://github.com/xxxx",
   "scripts": {
     "build": "tsc && vite build",
     "release": "tsc && vite build && yarn publish"
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.190",
-    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@types/node": "^18.11.9",
@@ -23,7 +19,6 @@
     "@typescript-eslint/eslint-plugin": "^5.44.0",
     "@typescript-eslint/parser": "^5.44.0",
     "@vitest/coverage-c8": "^0.25.3",
-    "deep-object-diff": "^1.1.9",
     "eslint": "8.22.0",
     "jsdom": "^20.0.3",
     "typescript": "^4.6.4",
