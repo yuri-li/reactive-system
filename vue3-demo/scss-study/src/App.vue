@@ -1,14 +1,25 @@
 <template>
-  <Loading />
+  <div class="menu">
+    <router-link to="/circularMenu">CircularMenu</router-link>
+    <router-link to="/loading">Loading</router-link>
+  </div>
+  <div class="main">
+    <router-view></router-view>
+  </div>
 </template>
-<script setup lang="ts">
-import Loading from "@/components/loading/Index.vue"
-</script>
-<style lang="scss">
-body {
-  @include flexBox;
+<style lang="scss" scoped>
+.menu{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  width: 30%;
+  height: 100vh;
+  background-color: antiquewhite;
 }
-#app{
-  @include flexBox;
+.main{
+  display: flex;
+  width: 70%;
+  height: 100vh;
 }
 </style>

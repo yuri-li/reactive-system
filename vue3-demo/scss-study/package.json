@@ -2,7 +2,7 @@
   "name": "scss-study",
   "private": true,
   "version": "0.0.1",
-  "author": "",
+  "author": "yuri <javaliyuanyuan@163.com> (https://github.com/yuri-li)",
   "type": "module",
   "packageManager": "yarn@1.22.19",
   "scripts": {
@@ -17,6 +17,7 @@
     "vue": "^3.2.41"
   },
   "devDependencies": {
+    "@iconify-prerendered/vue-bi": "^0.16.1668407301",
     "@types/lodash": "^4.14.190",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
@@ -26,6 +27,7 @@
     "@vue/test-utils": "^2.2.1",
     "eslint": "8.22.0",
     "eslint-plugin-vue": "^9.7.0",
+    "generate-routes-yuri": "^0.0.2",
     "jsdom": "^20.0.2",
     "lodash": "^4.17.21",
     "sass": "^1.56.1",
