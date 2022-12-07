@@ -1,6 +1,7 @@
 <template>
   <div class="menu">
     <router-link to="/circularMenu">CircularMenu</router-link>
+    <router-link to="/clock">Clock</router-link>
     <router-link to="/loading">Loading</router-link>
   </div>
   <div class="main">

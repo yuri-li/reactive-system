@@ -1,0 +1,5 @@
+.container{
+  @include flexBox;
+  width: 100vw;
+  background: linear-gradient(-90deg, $background-color);
+}

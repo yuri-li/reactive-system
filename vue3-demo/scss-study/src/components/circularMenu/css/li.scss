@@ -1,0 +1,19 @@
+li {
+  @include social;
+  position: absolute;
+  transform-origin: $menu-side-length / 2;
+  scale: 0;
+  font-size: 1.75em;
+  transition-duration: 0.05s;
+  @for $i from 1 through 8 {
+    &:nth-child(#{$i}) {
+      color: nth($icon-color, $i);
+      transition-delay: 0.05s * $i;
+      transform: rotate(360deg / 8 * $i);
+
+      svg {
+        transition-duration: 2s;
+      }
+    }
+  }
+}
