@@ -3,3 +3,11 @@
   justify-content: center;
   align-items: center;
 }
+@mixin square($length){
+  width: $length;
+  height: $length;
+}
+@mixin round($length){
+  @include square($length);
+  border-radius: 50%;
+}

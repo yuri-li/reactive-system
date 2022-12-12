@@ -6,6 +6,7 @@ import Vue from "@vitejs/plugin-vue"
 import { resolve } from "path"
 import VueMacros from "unplugin-vue-macros/vite"
 
+
 // https://vitejs.dev/config/
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
@@ -39,7 +40,7 @@ export default defineConfig({
     },
     test: {
         globals: true,
-        environment: "jsdom",
+        environment: "node",
         coverage: {
             reporter: ["text", "json", "html"],
         },

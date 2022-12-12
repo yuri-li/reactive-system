@@ -1,0 +1,23 @@
+.secondLines {
+  position: absolute;
+  left: $clock-length/2;
+  top: 0;
+  li {
+    @include flexBox;
+    position: absolute;
+    transform-origin: 0;
+    width: 1px;
+    height: $clock-length;
+  }
+  @for $i from 1 through 30 {
+    li:nth-child(#{$i}) {
+      transform: rotate(6deg * $i);
+      &::before{
+        @include secondLineHeader($i, "before");
+      }
+      &::after{
+        @include secondLineHeader($i, "after");
+      }
+    }
+  }
+}

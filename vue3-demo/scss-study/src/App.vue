@@ -9,7 +9,7 @@
   </div>
 </template>
 <style lang="scss" scoped>
-.menu{
+.menu {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -18,7 +18,8 @@
   height: 100vh;
   background-color: antiquewhite;
 }
-.main{
+
+.main {
   display: flex;
   width: 70%;
   height: 100vh;

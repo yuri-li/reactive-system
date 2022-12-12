@@ -1,0 +1,15 @@
+.hand{
+  position: absolute;
+  @include flexBox;
+  left: $clock-length/2;
+  top: $clock-length/2;
+  .hour{
+    @include handHeader(3px,60px, #222);
+  }
+  .minute{
+    @include handHeader(3px,100px, #68C3D4);
+  }
+  .second{
+    @include handHeader(2px,180px, #EB6444);
+  }
+}
