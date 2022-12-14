@@ -1,3 +1,5 @@
+import type { Ref } from "vue"
+
 function pan(time: number) {
     return time < 10 ? `0${time}` : `${time}`
 }
@@ -40,5 +42,9 @@ export class TimeDef {
         return {hour: pan(this.hour), minute: pan(this.minute), second: pan(this.second),}
     }
 }
-
-export { pan, formatRotate, format12Hours, }
+function reset(digitalTime: Ref<DegreeTime | undefined>, degreeTime: Ref<DegreeTime | undefined>) {
+    const timeDef = new TimeDef()
+    digitalTime.value = timeDef.toDigitalTime()
+    degreeTime.value = timeDef.toTimeDegree()
+}
+export { pan, formatRotate, format12Hours, reset, }

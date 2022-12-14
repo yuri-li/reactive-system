@@ -19,22 +19,25 @@
 
 <script setup lang="ts">
 import { range } from "lodash"
-import { ref } from "vue"
-import { DigitalTime, DegreeTime, TimeDef, } from "@/components/clock/model"
+import { onBeforeMount, onUnmounted, ref } from "vue"
+import { DigitalTime, DegreeTime, reset, } from "@/components/clock/model"
 
 defineOptions({
   name: "Clock",
 })
 
-let timeDef = new TimeDef()
-const digitalTime = ref<DigitalTime>(timeDef.toDigitalTime())
-const degreeTime = ref<DegreeTime>(timeDef.toTimeDegree())
-setInterval(() => {
-  timeDef = new TimeDef()
-  digitalTime.value = timeDef.toDigitalTime()
-  degreeTime.value = timeDef.toTimeDegree()
-}, 1000)
+const digitalTime = ref<DigitalTime>()
+const degreeTime = ref<DegreeTime>()
 
+onBeforeMount(() => {
+  reset(digitalTime, degreeTime)
+})
+const interval = setInterval(() => {
+  reset(digitalTime, degreeTime)
+}, 1000)
+onUnmounted(() => {
+  clearInterval(interval)
+})
 </script>
 
 <style lang="scss" scoped>

@@ -49,7 +49,6 @@ body {
   height: 100vh;
 }
 </style>
-
 ```
 
 ## 1.2 Loading.vue

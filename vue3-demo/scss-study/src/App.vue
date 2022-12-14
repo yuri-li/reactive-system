@@ -4,6 +4,7 @@
     <router-link to="/clock">Clock</router-link>
     <router-link to="/dice">Dice</router-link>
     <router-link to="/loading">Loading</router-link>
+    <router-link to="/multiChart">MultiChart</router-link>
   </div>
   <div class="main">
     <router-view></router-view>
@@ -15,7 +16,7 @@
   flex-direction: column;
   align-items: flex-end;
   flex-wrap: wrap;
-  width: 30%;
+  width: 30vw;
   height: 100vh;
   background-color: antiquewhite;
 }
