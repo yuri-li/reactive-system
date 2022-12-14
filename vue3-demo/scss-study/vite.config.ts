@@ -4,20 +4,15 @@
 import { defineConfig, splitVendorChunkPlugin } from "vite"
 import Vue from "@vitejs/plugin-vue"
 import { resolve } from "path"
-import VueMacros from "unplugin-vue-macros/vite"
+import DefineOptions from "unplugin-vue-define-options/vite"
 
 
 // https://vitejs.dev/config/
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
     plugins: [
-        VueMacros({
-            plugins: {
-                vue: Vue({
-                    reactivityTransform: true
-                }),
-            },
-        }),
+        Vue(),
+        DefineOptions(),
         splitVendorChunkPlugin(),
     ],
     css: {
