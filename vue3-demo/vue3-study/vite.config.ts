@@ -1,42 +1,36 @@
 /// <reference types="vitest" />
 // noinspection SpellCheckingInspection
 
-import { defineConfig,splitVendorChunkPlugin } from "vite"
+import { defineConfig, splitVendorChunkPlugin } from "vite"
 import Vue from "@vitejs/plugin-vue"
 import { resolve } from "path"
-import VueMacros from "unplugin-vue-macros/vite"
-
+import DefineOptions from "unplugin-vue-define-options/vite"
+import ElementPlus from "unplugin-element-plus/vite"
+import Icons from "unplugin-icons/vite"
 
 // https://vitejs.dev/config/
 // noinspection JSUnusedGlobalSymbols
 export default defineConfig({
-    plugins: [
-        VueMacros({
-            plugins: {
-                vue: Vue({
-                    reactivityTransform: true
-                }),
-            },
+    plugins: [ElementPlus(), Vue(), DefineOptions(),
+        Icons({
+            autoInstall: true,
         }),
-        splitVendorChunkPlugin(),
-    ],
-    build: {
-        target: "esnext",
-        // minify: false,
-        // sourcemap: true,
-    },
-    resolve: {
-        alias: {
-            "@": resolve(__dirname, "src/"),
-            "~": resolve(__dirname, "test/")
+        splitVendorChunkPlugin(),], css: {
+        preprocessorOptions: {
+            scss: {
+                additionalData: "@import '@/assets/css/variable.scss';@import '@/assets/css/main.scss';"
+            }
         }
-    },
-    test: {
-        globals: true,
-        environment: "jsdom",
-        coverage: {
+    }, build: {
+        target: "esnext", // minify: false,
+        // sourcemap: true,
+    }, resolve: {
+        alias: {
+            "@": resolve(__dirname, "src/"), "~": resolve(__dirname, "test/")
+        }
+    }, test: {
+        globals: true, environment: "jsdom", coverage: {
             reporter: ["text", "json", "html"],
-        },
-        include: ["test/**/*.spec.ts"],
+        }, include: ["test/**/*.spec.ts"],
     },
 })
