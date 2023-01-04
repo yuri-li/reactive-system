@@ -1,10 +1,11 @@
 import { createRouter, createWebHashHistory } from "vue-router"
 
-const routes = [{path: "/", redirect: {name: "Form"}},
+const routes = [{path: "/", redirect: {name: "CascaderAddress"}},
     {path: "/helloWorld", name: "HelloWorld", component: () => import("@/components/HelloWorld.vue")},
     {path: "/reverseString", name: "ReverseString", component: () => import("@/components/ReverseString.vue")},
     { path: "/login", name: "Login", component: () => import("@/components/login/Index.vue") },
     { path: "/form", name: "Form", component: () => import("@/components/form/Index.vue") },
+    { path: "/cascader/address", name: "CascaderAddress", component: () => import("@/components/cascader/address/Index.vue") },
     { path: "/multiplicationTable", name: "MultiplicationTable", component: () => import("@/components/multiplicationTable/Index.vue")},
     {path: "/multiplicationTable/item", name: "MultiplicationTableItem", component: () => import("@/components/multiplicationTable/Item.vue")}]
 
