@@ -10,6 +10,7 @@
 <script setup lang="ts">
 import Item from "@/components/multiplicationTable/Item.vue"
 import _ from "lodash"
+import { defineOptions } from "unplugin-vue-define-options/macros"
 
 defineOptions({
   name: "MultiplicationTable",
