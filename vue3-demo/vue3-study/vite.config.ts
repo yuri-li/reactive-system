@@ -29,7 +29,11 @@ export default defineConfig({
             "@": resolve(__dirname, "src/"), "~": resolve(__dirname, "test/")
         }
     }, test: {
-        globals: true, environment: "jsdom", coverage: {
+        globals: true,
+        deps:{
+            inline: true,
+        },
+        environment: "jsdom", coverage: {
             reporter: ["text", "json", "html"],
         }, include: ["test/**/*.spec.ts"],
     },

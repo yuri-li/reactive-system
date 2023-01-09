@@ -1,78 +1,75 @@
 <template>
-  <ElForm ref="formRef" :model="form" label-width="120px">
-    <ElFormItem label="Activity name">
-      <ElInput v-model="form.name" />
+  <ElForm ref="formRef" :model="formData" label-width="120px">
+    <ElFormItem label="活动名称">
+      <ElInput v-model="formData.activityName" />
     </ElFormItem>
-    <ElFormItem label="Activity zone">
-      <ElSelect v-model="form.region" placeholder="please select your zone">
-        <ElOption label="Zone one" value="shanghai" />
-        <ElOption label="Zone two" value="beijing" />
+    <ElFormItem label="活动场地">
+      <ElSelect v-model="formData.region" placeholder="请选择场地" :clearable="true">
+        <ElOption v-for="region in enumKeys(ActivityRegion)" :key="region" :label="ActivityRegion[region]" :value="region" />
       </ElSelect>
     </ElFormItem>
-    <ElFormItem label="Activity time">
-      <ElCol :span="11">
-        <ElDatePicker
-            v-model="form.date1"
-            type="date"
-            placeholder="Pick a date"
-            style="width: 100%"
-        />
-      </ElCol>
-      <ElCol :span="2" class="text-center">
-        <span style="color: rgba(107,114,128);">-</span>
-      </ElCol>
-      <ElCol :span="11">
-        <ElTimePicker
-            v-model="form.date2"
-            placeholder="Pick a time"
-            style="width: 100%"
-        />
-      </ElCol>
+    <ElFormItem label="活动时间">
+      <ElDatePicker
+          v-model="formData.time"
+          type="datetime"
+          placeholder="请选择日期和时间"
+      />
     </ElFormItem>
-    <ElFormItem label="Instant delivery">
-      <ElSwitch v-model="form.delivery" />
+    <ElFormItem label="立即发布">
+      <ElSwitch v-model="formData.delivery" />
     </ElFormItem>
-    <ElFormItem label="Activity type">
-      <ElCheckboxGroup v-model="form.type">
-        <ElCheckbox label="Online activities" name="type" />
-        <ElCheckbox label="Promotion activities" name="type" />
-        <ElCheckbox label="Offline activities" name="type" />
-        <ElCheckbox label="Simple brand exposure" name="type" />
+    <ElFormItem label="活动类型">
+      <ElCheckboxGroup v-model="formData.activityType">
+        <ElCheckbox v-for="activityType in enumKeys(ActivityType)" :key="activityType" :label="activityType" name="activityType">
+            {{ ActivityType[activityType] }}
+        </ElCheckbox>
       </ElCheckboxGroup>
     </ElFormItem>
-    <ElFormItem label="Resources">
-      <ElRadioGroup v-model="form.resource">
-        <ElRadio label="Sponsor" />
-        <ElRadio label="Venue" />
+    <ElFormItem label="赞助资源">
+      <ElRadioGroup v-model="formData.resource">
+        <ElRadio v-for="resource in enumKeys(ActivityResource)" :key="resource" :label="resource">{{ ActivityResource[resource] }}</ElRadio>
       </ElRadioGroup>
     </ElFormItem>
-    <ElFormItem label="Activity form">
-      <ElInput v-model="form.desc" type="textarea" />
+    <ElFormItem label="备注">
+      <ElInput v-model="formData.description" type="textarea" />
     </ElFormItem>
     <ElFormItem>
-      <ElButton type="primary" @click="onSubmit">Create</ElButton>
-      <ElButton>Cancel</ElButton>
+      <ElButton type="primary" :disabled="clickBtnState" @click="onSubmit">确认</ElButton>
+      <ElButton>重置</ElButton>
     </ElFormItem>
   </ElForm>
 </template>
 
 <script setup lang="ts">
-import {
-  ElForm, ElFormItem, ElInput, ElSelect, ElOption, ElCol, ElDatePicker, ElTimePicker, ElSwitch, ElCheckboxGroup,
-  ElCheckbox, ElRadioGroup, ElRadio, ElButton,
-} from "element-plus"
 import type { FormInstance } from "element-plus"
+import {
+  ElButton, ElCheckbox, ElCheckboxGroup, ElDatePicker, ElForm, ElFormItem, ElInput, ElOption, ElRadio, ElRadioGroup, ElSelect, ElSwitch,
+} from "element-plus"
 import { reactive, ref } from "vue"
-import { FormData } from "@/components/form/model"
+// noinspection ES6UnusedImports
+import { Activity, ActivityRegion, ActivityResource, ActivityType, } from "@/components/form/model"
+import { defineOptions } from "unplugin-vue-define-options/macros"
+import { replacer } from "@/util/JsonExtension"
+import { enumKeys } from "@/util/EnumExtension"
+
+defineOptions({
+  name: "Form",
+})
 
 const formRef = ref<FormInstance>()
-const form = reactive(new FormData())
+const formData = reactive<Activity.Create>(new Activity.Create())
+const clickBtnState = ref(false)
 
 async function onSubmit() {
-  await formRef.value?.validate((isValid: boolean) => {
-    if (isValid) {
-      alert(JSON.stringify(form))
-    }
-  })
+  console.log(`${new Date()}, 按钮状态：${clickBtnState.value}, before --- 提交`)
+  if (!clickBtnState.value) {
+    clickBtnState.value = true
+    await formRef.value?.validate((isValid: boolean) => {
+      if (isValid) {
+        console.log(`${new Date()}, 按钮状态：${clickBtnState.value}, 提交：${JSON.stringify(formData, replacer)}`)
+      }
+      setTimeout(() => clickBtnState.value = false, 3000)
+    })
+  }
 }
 </script>

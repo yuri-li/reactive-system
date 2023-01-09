@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory, NavigationGuardNext, RouteLocationNormalized } from "vue-router"
 
-const routes = [{path: "/", redirect: {name: "TodoList"}}, {
+const routes = [{path: "/", redirect: {name: "Form"}}, {
     path: "/helloWorld", name: "HelloWorld", component: () => import("@/components/HelloWorld.vue")
 }, {path: "/reverseString", name: "ReverseString", component: () => import("@/components/ReverseString.vue")}, {
     path: "/login", name: "Login", component: () => import("@/components/login/Index.vue"), meta: {title: "登录页面"},
