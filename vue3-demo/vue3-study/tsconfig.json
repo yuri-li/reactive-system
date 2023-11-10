@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "allowSyntheticDefaultImports": true,
+    "target": "ESNext",
+    "useDefineForClassFields": true,
+    "strict": true,
+    "alwaysStrict": true,
+    "importsNotUsedAsValues": "error",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "types": ["vitest/globals", "vue/ref-macros", "unplugin-vue-macros/macros-global"],
+    "lib": ["ESNext", "DOM"],
+    "skipLibCheck": true,
+    "noEmit": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+      "~/*": ["test/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts","src/**/*.d.ts","src/**/*.vue",
+    "src/**/*.json",
+    "test/**/*.ts","test/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

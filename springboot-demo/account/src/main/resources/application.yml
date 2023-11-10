@@ -1,0 +1,33 @@
+spring:
+  rsocket:
+    server:
+      transport: websocket
+#      transport: tcp
+      port: 6000
+      mapping-path: /account
+  r2dbc:
+    url: ${dbUrl}
+    username: ${dbUsername}
+    password: ${dbPassword}
+    pool:
+      initial-size: 1
+      max-size: 3
+
+security-settings:
+  auth-client:
+    name: ${authClientName}
+    id: ${authClientId}
+    secret: ${authClientPassword}
+  permit-routes:
+    greet: anonymous.greet
+    login: anonymous.login
+
+#logging:
+#  level:
+#    io:
+#      r2dbc:
+#        postgresql:
+#          PARAM: DEBUG
+#    org:
+#      springframework:
+#        r2dbc: DEBUG

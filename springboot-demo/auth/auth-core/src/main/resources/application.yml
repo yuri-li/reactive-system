@@ -1,0 +1,44 @@
+spring:
+  rsocket:
+    server:
+      transport: websocket
+#      transport: tcp
+      port: 6001
+      mapping-path: /auth
+  redis:
+    host: ${redisIp}
+    port: ${redisPort}
+    username: ${redisUsername}
+    password: ${redisPassword}
+
+security-settings:
+  auth-client:
+    name: ${authClientName}
+    id: ${authClientId}
+    secret: ${authClientPassword}
+  permit-routes:
+    generateToken: anonymous.auth.generate.token
+    getAuthentication: anonymous.auth.get.authentication
+    refreshToken: anonymous.auth.refresh.token
+
+#Admin, SubAccount, Employer, Applicant, Guest
+auth-token:
+  expiry-policies:
+    Schoolmaster:
+      access-token: 15M
+      refresh-token: 30M
+    Teacher:
+      access-token: 15M
+      refresh-token: 30M
+    Student:
+      access-token: 15M
+      refresh-token: 30M
+#    Schoolmaster:
+#      access-token: 7D
+#      refresh-token: 30D
+#    Teacher:
+#      access-token: 7D
+#      refresh-token: 30D
+#    Student:
+#      access-token: 7D
+#      refresh-token: 30D

@@ -1,0 +1,30 @@
+.container {
+  @include flexBox;
+  width: 100vw;
+  background: linear-gradient(45deg, $background-color);
+
+  .menu {
+    @include flexBox;
+    @include square($menu-side-length);
+    position: relative;
+
+    .share {
+      @include social;
+      transition-duration: 2s;
+      font-size: 2em;
+
+      &:hover {
+        box-shadow: 0 6px 8px #00000026,
+        0 0 0 2px #333,
+        0 0 0 8px #fff;
+      }
+    }
+
+    ul {
+      list-style: none;
+      position: absolute;
+      left: 0;
+      top: $ul-top;
+    }
+  }
+}

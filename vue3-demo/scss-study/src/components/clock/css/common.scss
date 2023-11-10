@@ -1,0 +1,54 @@
+$background-color: #2FC5BA, #62C6C9, #2FC5BA;
+$clock-color: #FDFAF7 #EBEB83 #F4F48E #E5E375;
+$clock-length: 272px;
+
+/**
+ * 表盘刻度
+ * @param $i: 下标
+ * @param $header-type: before 或 after
+ * @param $length:
+ */
+@mixin secondLineHeader($i,$header-type,$length: 10px) {
+  content: "";
+  background: #A0A1A4;
+  position: absolute;
+  width: 100%;
+  @if $i % 5 == 0 {
+    height: $length * 2;
+  } @else {
+    height: $length;
+  }
+  @if $header-type == "before" {
+    bottom: 0;
+  } @else {
+    top: 0;
+  }
+  left: 0;
+}
+
+@mixin handHeader($width,$length,$color) {
+  width: $width;
+  height: $length;
+  border-radius: 3px;
+  position: absolute;
+  &::before {
+    content: "";
+    background: $color;
+    position: absolute;
+    width: 100%;
+    height: $length / 2;
+    border-radius: 3px;
+    top: 0;
+    left: 0;
+  }
+  &::after {
+    content: "";
+    background: $color;
+    position: absolute;
+    width: 100%;
+    height: $length/5;
+    border-radius: 3px;
+    bottom: $length/2.5;
+    left: 0;
+  }
+}

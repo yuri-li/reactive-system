@@ -1,0 +1,16 @@
+{
+  "groups": [
+    {
+      "name": "auth-token",
+      "type": "org.study.auth.config.AuthTokenProperties",
+      "sourceType": "org.study.auth.config.AuthTokenProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "auth-token.expiryPolicies",
+      "type": "kotlin.collections.Map<org.study.auth.model.Role,org.study.auth.config.ExpiryPolicy>",
+      "sourceType": "org.study.auth.config.AuthTokenProperties"
+    }
+  ]
+}

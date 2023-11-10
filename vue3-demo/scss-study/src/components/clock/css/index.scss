@@ -1,0 +1,19 @@
+.container {
+  @include flexBox;
+  width: 100vw;
+  background: linear-gradient(-90deg, $background-color);
+
+  .clock {
+    @include flexBox;
+    position: relative;
+    @include round($clock-length);
+    background-color: nth($clock-color, 1);
+    box-shadow: 0 6px 8px nth($clock-color, 2),
+    0 0 0 2px nth($clock-color, 3),
+    0 0 0 10px nth($clock-color, 4);
+  }
+}
+
+ul {
+  list-style: none;
+}

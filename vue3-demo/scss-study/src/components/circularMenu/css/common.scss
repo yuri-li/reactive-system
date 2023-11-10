@@ -1,0 +1,11 @@
+$background-color: #9ad751, #2196f3;
+$menu-side-length: 280px;
+$social-side-length: 60px;
+$ul-top: ($menu-side-length - $social-side-length) / 2;
+$icon-color: #1877f2 #25d366 #1da1f2 #ea4c89 #0a66c2 #c32aa3 #bd081c #ff0000;
+
+@mixin social {
+  @include flexBox;
+  @include round($social-side-length);
+  background: #fff;
+}

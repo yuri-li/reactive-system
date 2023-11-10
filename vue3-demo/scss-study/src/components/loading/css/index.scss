@@ -1,0 +1,49 @@
+.container {
+  @include flexBox;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
+  color: white;
+
+  .ring {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    border-top: 4px solid $default-color;
+    margin: -30px;
+    animation: forwardRotate 1s ease infinite;
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      top: 12px;
+      right: 12px;
+      border-radius: 50%;
+      @include colorHead($default-color);
+    }
+
+    &:nth-child(2) {
+      border-top: 4px solid $pink-color;
+      animation: reverseRotate 1s ease infinite;
+
+      &::before {
+        left: 12px;
+        @include colorHead($pink-color);
+      }
+    }
+
+    &:nth-child(3) {
+      position: absolute;
+      top: 165px;
+      border-top: 4px solid $green-color;
+
+      &::before {
+        @include colorHead($green-color);
+      }
+    }
+  }
+}

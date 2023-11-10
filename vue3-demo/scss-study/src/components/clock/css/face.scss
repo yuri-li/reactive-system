@@ -1,0 +1,24 @@
+$angle: 30deg;
+// 表盘数字
+.face {
+  position: absolute;
+  left: 0;
+  top: $clock-length/2.2;
+
+  li {
+    @include flexBox;
+    position: absolute;
+    transform-origin: $clock-length/2;
+    width: $clock-length/5;
+  }
+
+  @for $i from 1 through 12 {
+    li:nth-child(#{$i}) {
+      transform: rotate($angle * ($i + 3));
+
+      span {
+        transform: rotate(-$angle * ($i + 3));
+      }
+    }
+  }
+}

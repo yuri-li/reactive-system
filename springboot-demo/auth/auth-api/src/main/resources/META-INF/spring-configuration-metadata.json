@@ -1,0 +1,38 @@
+{
+  "groups": [
+    {
+      "name": "security-settings",
+      "type": "org.study.auth.model.SecuritySettings",
+      "sourceType": "org.study.auth.model.SecuritySettings"
+    }
+  ],
+  "properties": [
+    {
+      "name": "security-settings.authClient",
+      "type": "org.study.auth.model.AuthClient",
+      "sourceType": "org.study.auth.model.SecuritySettings",
+      "defaultValue": null
+    },
+    {
+      "name": "security-settings.authClient.name",
+      "type": "java.lang.String",
+      "sourceType": "org.study.auth.model.SecuritySettings"
+    },
+    {
+      "name": "security-settings.authClient.id",
+      "type": "java.lang.String",
+      "sourceType": "org.study.auth.model.SecuritySettings"
+    },
+    {
+      "name": "security-settings.authClient.secret",
+      "type": "java.lang.String",
+      "sourceType": "org.study.auth.model.SecuritySettings"
+    },
+    {
+      "name": "security-settings.permitRoutes",
+      "type": "kotlin.collections.Map<java.lang.String,java.lang.String>",
+      "sourceType": "org.study.auth.model.SecuritySettings",
+      "defaultValue": null
+    }
+  ]
+}

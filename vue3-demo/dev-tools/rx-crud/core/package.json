@@ -1,0 +1,46 @@
+{
+  "name": "rx-crud",
+  "private": false,
+  "version": "0.1.0",
+  "license": "MIT",
+  "author": "yuri <javaliyuanyuan@163.com> (https://github.com/yuri-li)",
+  "main": "dist/rx-crud.mjs",
+  "module": "dist/rx-crud.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/rx-crud.mjs"
+    }
+  },
+  "homepage": "https://github.com/yuri-li/reactive-system/tree/main/vue3-demo/dev-tools/rx-crud/core",
+  "keywords": [
+    "CRUD",
+    "rsocket",
+    "typescript",
+    "vue3",
+    "element-plus"
+  ],
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc && vite build",
+    "release": "tsc && vite build && npm publish",
+    "coverage": "vitest run --coverage",
+    "lint:script": "eslint --ext .ts,.vue --ignore-path .gitignore ."
+  },
+  "dependencies": {
+    "buffer": "^6.0.3",
+    "rsocket-composite-metadata": "^1.0.0-alpha.3",
+    "rsocket-websocket-client": "^1.0.0-alpha.3",
+    "element-plus": "^2.4.1",
+    "vue": "^3.3.7"
+  },
+  "devDependencies": {
+    "@rollup/plugin-typescript": "^11.1.5",
+    "@types/node": "^20.8.8",
+    "@vitejs/plugin-vue": "^4.4.0",
+    "ts-node": "^10.9.1",
+    "vite-plugin-dts": "^3.6.1",
+    "vitest": "^0.34.6"
+  }
+}
