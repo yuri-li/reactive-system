@@ -4,7 +4,6 @@ import { requestStream, StreamResponse, fireAndForget, } from "rx-crud"
 import { User } from "@/components/userProfile/model"
 import { Payload } from "rsocket-core/dist/RSocket"
 
-
 const requestN = 2
 const [disableInitDB, disableSearch, disableAddUser, disableLoadMore] = [ref(false), ref(true), ref(true), ref(true)]
 const tableData: User[] = reactive([])

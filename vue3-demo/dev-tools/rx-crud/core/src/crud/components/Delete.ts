@@ -5,6 +5,7 @@ import type { Ref } from "vue"
 import { throttle } from "@/crud/service/throttle"
 import { BusinessException } from "@/globalException"
 import { LastSubmittedData } from "@/crud/model/cacheData/LastSubmittedData"
+import { toRaw } from "@/crud/components/Create.ts"
 
 class Delete<T> {
     private readonly cache: T | T[] | LastSubmittedData<T | T[]>
@@ -17,7 +18,7 @@ class Delete<T> {
     }
 
     constructor(_cache: T | T[] | LastSubmittedData<T | T[]>, _allowDuplicate: boolean = false, _allowEmpty: boolean = false) {
-        this.cache = _cache
+        this.cache = toRaw(_cache)
         this.allowDuplicate = _allowDuplicate
         this.allowEmpty = _allowEmpty
         const [_validate, _disabledBtn] = throttle(this.validate)

@@ -5,12 +5,20 @@ import { decodeDiffDetail } from "@/crud/model/DiffDetail"
 import type { Ref } from "vue"
 import { throttle } from "@/crud/service/throttle"
 import { LastSubmittedData } from "@/crud/model/cacheData/LastSubmittedData"
-import type { ContainsInitData } from "@/crud/model/cacheData/ContainsInitData"
+import { ContainsInitData } from "@/crud/model/cacheData/ContainsInitData"
+
+function toRaw<T>(value: T | LastSubmittedData<T> | ContainsInitData<T>) {
+    if (value instanceof LastSubmittedData || value instanceof ContainsInitData) {
+        return value
+    } else {
+        return JSON.parse(JSON.stringify(value))
+    }
+}
 
 abstract class Operator<T> {
-    cache: T | LastSubmittedData<T> | ContainsInitData<T>
+    protected cache: T | LastSubmittedData<T> | ContainsInitData<T>
     disabledBtn: Ref<boolean>
-    allowDuplicate: boolean
+    protected allowDuplicate: boolean
 
     protected async validate(formRef: FormInstance) {
         return await formRef.validate(() => {
@@ -18,7 +26,7 @@ abstract class Operator<T> {
     }
 
     public constructor(_cache: T | LastSubmittedData<T> | ContainsInitData<T>, _allowDuplicate: boolean = false) {
-        this.cache = _cache
+        this.cache = toRaw(_cache)
         this.allowDuplicate = _allowDuplicate
         const [_validate, _disabledBtn] = throttle(this.validate)
         this.disabledBtn = _disabledBtn
@@ -43,6 +51,7 @@ abstract class Operator<T> {
         }
     }
 }
+
 class Create<T> extends Operator<T> {
     onSubmit = async <R>(formRef: FormInstance, formData: T, action: (t: T) => Promise<R>) => {
         const isValid = await this.validate(formRef)
@@ -63,4 +72,5 @@ class Create<T> extends Operator<T> {
 export {
     Create,
     Operator,
+    toRaw,
 }
