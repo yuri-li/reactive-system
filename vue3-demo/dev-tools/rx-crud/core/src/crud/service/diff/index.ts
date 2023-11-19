@@ -8,18 +8,14 @@ import {
     isAllCollectionEquals,
     isCollectionEquals
 } from "@/crud/service/diff/isCollectionEquals"
-import { diffObject } from "@/crud/service/diff/diffObject"
 import { toDetail } from "@/crud/service/baseModel/decode/toDetail"
 
 class Diff<T> {
-    // @ts-ignore
-    private cache: BaseModel
-    // @ts-ignore
-    private formData: BaseModel
-    // @ts-ignore
-    private operationType: OperationType
+    private readonly cache: BaseModel
+    private readonly formData: BaseModel
+    private readonly operationType: OperationType
     readonly detail: DiffDetail<T> | null
-    private allowDuplicate: boolean
+    private readonly allowDuplicate: boolean
 
     constructor(_cache: T | null, _formData: T, _operationType: OperationType, _allowDuplicate: boolean) {
         this.cache = toBaseModel(_cache)
@@ -34,16 +30,17 @@ class Diff<T> {
         if (baseModel === null) {
             return null
         }
+
         return toDetail(baseModel)
     }
     private _diffBaseModel = (): DiffDetail<BaseModel> | null => {
         if (this.cache.valueType === BaseType.Empty || this.formData.valueType === BaseType.Empty) {
             return this._empty()
         }
+        if (this.cache.valueType !== this.formData.valueType) {
+            throw CustomException.Unexpected_Data_Type
+        }
         if (this.formData.valueType !== BaseType.Object) {
-            if (this.cache.valueType !== this.formData.valueType) {
-                throw CustomException.Unexpected_Data_Type
-            }
             if (BaseType.isPrimitive(this.formData.valueType)) {
                 return this._buildDiffDetail(this.cache.value === this.formData.value)
             }
@@ -55,13 +52,6 @@ class Diff<T> {
         return this._object()
     }
     private _object = (): DiffDetail<BaseModel> => {
-        if (this.operationType === OperationType.Update) {
-            const model = diffObject(this.cache.value as BaseModel[], this.formData.value as BaseModel[])
-            if (model.added === undefined && model.deleted === undefined && model.updated === undefined) {
-                throw CustomException.Forbidden_Unchanged_Value
-            }
-            return model
-        }
         if (isAllCollectionEquals(this.cache.value as BaseModel[], this.formData.value as BaseModel[])) {
             if(this.allowDuplicate){
                 return new DiffDetail<BaseModel>({unchanged: this.formData})
@@ -73,9 +63,6 @@ class Diff<T> {
     }
     private _buildDiffDetail = (_isEquals: boolean): DiffDetail<BaseModel> => {
         if (_isEquals) {
-            if (this.operationType === OperationType.Update) {
-                throw CustomException.Forbidden_Unchanged_Value
-            }
             if(this.allowDuplicate){
                 return new DiffDetail<BaseModel>({unchanged: this.formData})
             }
@@ -104,10 +91,6 @@ class Diff<T> {
             return new DiffDetail<BaseModel>({deleted: this.cache})
         }
 
-        //最后一种情况：cache为空，formData不为空
-        if (this.operationType === OperationType.Update) {
-            throw CustomException.Load_Data_Exception
-        }
         return new DiffDetail<BaseModel>({added: this.formData})
     }
 }

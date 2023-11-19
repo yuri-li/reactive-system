@@ -42,7 +42,7 @@ class Delete<T> {
             throw new BusinessException("禁止删除全部")
         }
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const model = decodeDiffDetail(diff.detail!)!!
+        const model = decodeDiffDetail(diff.detail!)!
         this._setCache(model)
         return model
     }

@@ -18,8 +18,6 @@ class Address {
 }
 ```
 
-
-
 # 2 什么是Empty?
 
 ![](assets/2023-10-25-12-53-37-image.png)

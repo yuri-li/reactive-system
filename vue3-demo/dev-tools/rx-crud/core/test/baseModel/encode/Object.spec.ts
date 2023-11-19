@@ -6,7 +6,7 @@ import {
 import {
     Address,
     Person
-} from "~/baseType/model"
+} from "~/model"
 import { toJson } from "~/baseModel/encode/model"
 
 describe("对象", () => {

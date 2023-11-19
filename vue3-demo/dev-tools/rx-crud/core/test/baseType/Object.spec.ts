@@ -8,7 +8,7 @@ import { toBaseType } from "@/crud/service/baseModel/encode/toBaseType"
 import {
     Address,
     Person
-} from "~/baseType/model"
+} from "~/model"
 
 describe("对象", () => {
     test("对象", () => {

@@ -23,8 +23,7 @@ function decodeDiffDetail<T>(detail: DiffDetail<T>): T {
         // @ts-ignore
         model = detail.updated
     }
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return model!!
+    return model!
 }
 
 export {

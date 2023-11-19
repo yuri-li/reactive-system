@@ -5,11 +5,11 @@ import {
 import {
     Address,
     Person
-} from "~/baseType/model"
+} from "~/model"
 import { toJson } from "~/baseModel/encode/model"
 
 describe("数组", () => {
-    test("数组", () => {
+    test("数字、字符串、空对象", () => {
         expect(toJson([1, 2])).toBe(`{"value":[{"value":1,"valueType":"Int"},{"value":2,"valueType":"Int"}],"valueType":"Array","isAllPrimitives":true}`)
         expect(toJson([1, "abc"])).toBe(`{"value":[{"value":1,"valueType":"Int"},{"value":"abc","valueType":"String"}],"valueType":"Array","isAllPrimitives":true}`)
         expect(toJson([1, "abc", {}])).toBe(`{"value":[{"value":1,"valueType":"Int"},{"value":"abc","valueType":"String"}],"valueType":"Array","isAllPrimitives":true}`)

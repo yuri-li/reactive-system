@@ -3,7 +3,7 @@ import { BusinessException } from "@/globalException"
 class OperationType {
     public static readonly Create = new OperationType("Create", "新增")
     public static readonly Read = new OperationType("Read", "查询")
-    public static readonly Update = new OperationType("Update", "更新")
+    // public static readonly Update = new OperationType("Update", "更新")
     public static readonly Delete = new OperationType("Delete", "删除")
 
     public readonly name: string
@@ -15,7 +15,7 @@ class OperationType {
     }
 
     static values(): OperationType[] {
-        return [this.Create, this.Read, this.Update, this.Delete]
+        return [this.Create, this.Read, this.Delete]
     }
 
     static valueOf(_name: string): OperationType {
@@ -23,8 +23,6 @@ class OperationType {
             return OperationType.Create
         } else if (_name == OperationType.Read.name) {
             return OperationType.Read
-        } else if (_name == OperationType.Update.name) {
-            return OperationType.Update
         } else if (_name == OperationType.Delete.name) {
             return OperationType.Delete
         }

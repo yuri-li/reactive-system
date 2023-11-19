@@ -22,7 +22,7 @@ class LastSubmittedData<T> {
     }
 
     public getData(): T | null {
-        let _data = this.read()
+        const _data = this.read()
         if (isEmpty(_data)) {
             return null
         } else {
@@ -47,7 +47,7 @@ class LastSubmittedData<T> {
     }
 
     public setData(_data: T | null) {
-        let _json = this.toJson(_data)
+        const _json = this.toJson(_data)
         if (_json !== null) {
             if (this.storageType === StorageType.Local) {
                 localStorage.setItem(this.cacheKey, _json)

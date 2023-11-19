@@ -8,7 +8,7 @@ import { toBaseType } from "@/crud/service/baseModel/encode/toBaseType"
 import {
     Address,
     Person
-} from "~/baseType/model"
+} from "~/model"
 describe("empty", () => {
     test.each([null, undefined, NaN, Infinity])("1. 特殊类型【%s】 is Empty", (value) => {
         expect(toBaseType(value)).toBe(BaseType.Empty)

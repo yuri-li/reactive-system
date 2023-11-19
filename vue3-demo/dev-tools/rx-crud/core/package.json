@@ -1,7 +1,7 @@
 {
   "name": "rx-crud",
   "private": false,
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "author": "yuri <javaliyuanyuan@163.com> (https://github.com/yuri-li)",
   "main": "dist/rx-crud.mjs",
@@ -30,15 +30,17 @@
   },
   "dependencies": {
     "buffer": "^6.0.3",
+    "element-plus": "^2.4.1",
     "rsocket-composite-metadata": "^1.0.0-alpha.3",
     "rsocket-websocket-client": "^1.0.0-alpha.3",
-    "element-plus": "^2.4.1",
     "vue": "^3.3.7"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^11.1.5",
     "@types/node": "^20.8.8",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@vitejs/plugin-vue": "^4.4.0",
+    "eslint-plugin-import": "^2.29.0",
     "ts-node": "^10.9.1",
     "vite-plugin-dts": "^3.6.1",
     "vitest": "^0.34.6"

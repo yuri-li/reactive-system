@@ -7,6 +7,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
@@ -21,7 +22,6 @@
   "rules": {
     "import/extensions": [
       "error",
-      "ignorePackages",
       {
         "js": "never",
         "jsx": "never",
@@ -30,11 +30,16 @@
         "mjs": "never"
       }
     ],
+    "import/no-unresolved": "off",
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-empty-function": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-async-promise-executor": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
     "quotes": [
       "error",
-      "double"
+      "double",
+      {"allowTemplateLiterals": true}
     ],
     "semi": [
       "error",

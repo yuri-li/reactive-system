@@ -5,16 +5,17 @@ import {
 import {
     Address,
     Person
-} from "~/baseType/model"
-import { toJson } from "~/baseModel/encode/model"
+} from "~/model"
+import { decodeBaseModel } from "@/crud/service/baseModel/decode/decodeBaseModel"
+import { toBaseModel } from "@/crud/service/baseModel/encode/toBaseModel"
 
 describe("数组", () => {
-    test("数组", () => {
-        expect(toJson([1, 2])).toBe(`{"value":[{"value":1,"valueType":"Int"},{"value":2,"valueType":"Int"}],"valueType":"Array","isAllPrimitives":true}`)
-        expect(toJson([1, "abc"])).toBe(`{"value":[{"value":1,"valueType":"Int"},{"value":"abc","valueType":"String"}],"valueType":"Array","isAllPrimitives":true}`)
-        expect(toJson([1, "abc", {}])).toBe(`{"value":[{"value":1,"valueType":"Int"},{"value":"abc","valueType":"String"}],"valueType":"Array","isAllPrimitives":true}`)
-        expect(toJson(["", {}])).toBe(`{"valueType":"Empty"}`)
-        expect(toJson([new Person({username: "yuri"})])).toBe(`{"value":[{"value":[{"key":"username","value":"yuri","valueType":"String"}],"valueType":"Object","isAllPrimitives":true}],"valueType":"Array"}`)
-        expect(toJson([new Address({postcode: "47A894"})])).toBe(`{"value":[{"value":[{"key":"postcode","value":"47A894","valueType":"String"}],"valueType":"Object","isAllPrimitives":true}],"valueType":"Array"}`)
+    test("数字、字符串、空对象", () => {
+        expect(JSON.stringify(decodeBaseModel(toBaseModel([1, 2])))).toBe("[1,2]")
+        expect(JSON.stringify(decodeBaseModel(toBaseModel([1, "abc"])))).toBe(`[1,"abc"]`)
+        expect(JSON.stringify(decodeBaseModel(toBaseModel([1, "abc", {}])))).toBe(`[1,"abc"]`)
+        expect(decodeBaseModel(toBaseModel(["", {}]))).toBe(null)
+        expect(JSON.stringify(decodeBaseModel(toBaseModel([new Person({username: "yuri"})])))).toBe(`[{"username":"yuri"}]`)
+        expect(JSON.stringify(decodeBaseModel(toBaseModel([new Address({postcode: "47A894"})])))).toBe(`[{"postcode":"47A894"}]`)
     })
 })

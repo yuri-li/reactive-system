@@ -25,7 +25,7 @@ function buildMetadata(route: string) {
             routeMetadata
         )
     }
-    const token = localStorage.getItem("token")!!
+    const token = localStorage.getItem("token")!
     return encodeCompositeMetadata([
         [WellKnownMimeType.MESSAGE_RSOCKET_ROUTING, routeMetadata],
         [WellKnownMimeType.MESSAGE_RSOCKET_AUTHENTICATION, encodeBearerAuthMetadata(token)],

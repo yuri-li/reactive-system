@@ -24,7 +24,7 @@ describe("测试throttle",()=>{
     })
     test("Promise函数",async () => {
         const msg = "executed"
-        const fn = () => new Promise((resolve, _) => {
+        const fn = () => new Promise((resolve) => {
             setTimeout(() => {
                 resolve(msg)
             }, 1000)

@@ -83,28 +83,20 @@ describe("测试throttle",()=>{
 
 # 2 如何封装CacheData?
 
-![](assets/2023-11-07-15-02-49-image.png)
+![](assets/2023-11-18-14-28-01-image.png)
 
 - `LastSubmittedData`，缓存上一次提交的数据
 
 - `ContainsInitData`，缓存上一次提交的数据，且，设置初始值
 
-**1. Create,Read,Delete，可以不缓存用户提交的数据吗？**
+**1.为什么Update缓存的数据不能为空？**
 
-答：可以。使用类型T。
+答：Update，对比（缓存）的数据来自数据库。
 
-**2. Create，表单初始化会有默认值，可能是Empty吗？**
+**2. 为什么只有Delete的类型有数组？**
 
-答：可能。我规定的Empty更严格，若所有属性值为空，formData也为空。
+答：Delete，提交的数据不是formData，而是id或其他业务字段。且，允许批量删除
 
-**3.为什么Update的类型必须有id属性？**
-
-答：Update，对比的数据来自数据库。自增长的id在不同的数据库中，生成策略不同，且，在分布式数据库中很不方便。所以，统一使用UUID。
-
-**4. 为什么只有Delete的类型有数组？**
-
-答：Delete，提交的数据不是formData，而是id或其他业务字段。且，允许批量删除，就是数组类型了
-
-**5. 为什么Delete的类型不能是`ContainsInitData`？**
+**3. 为什么Delete的类型不能是`ContainsInitData`？**
 
 答：按id删除，id是变量，怎么给默认值？

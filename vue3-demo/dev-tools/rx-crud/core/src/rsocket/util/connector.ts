@@ -7,10 +7,7 @@ import { ErrorCodeException } from "@/globalException"
 import type { RSocket } from "rsocket-core/dist/RSocket"
 
 /**
- *   protocol: ws
- *   host: localhost
- *   port: 7001
- *   mappingPath: demo
+ * 示例: {"protocol": "ws", "host": "localhost", "port": 7001, "mappingPath": "demo"}
  */
 class RSocketConfig {
     protocol: "ws" | "wss" | undefined
@@ -54,10 +51,10 @@ async function createClient() {
         url,
         wsCreator: (_url) => {
             const ws = new WebSocket(_url)
-            ws.onopen = (_) => {
+            ws.onopen = () => {
                 console.log("创建链接")
             }
-            ws.onerror = (_) => {
+            ws.onerror = () => {
                 throw new ErrorCodeException("ConnectException", `RSocket connection to ${url} failed`)
             }
             return ws
