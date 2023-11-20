@@ -2,7 +2,7 @@ import {
     describe,
     test
 } from "vitest"
-import { TransferDto } from "@/components/transfer/model.ts"
+import { TransferDto } from "@/components/transfer/model"
 import {
     ErrorCodeException,
     requestResponse

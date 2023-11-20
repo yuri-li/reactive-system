@@ -1,10 +1,12 @@
 class ThrottleConfig {
     delay: number
-    effect: () => void
+    before: () => void
+    after: () => void
 
-    constructor(_delay: number, _effect: () => void) {
+    constructor(_delay: number, _before: () => void, _after: () => void) {
         this.delay = _delay
-        this.effect = _effect
+        this.before = _before
+        this.after = _after
     }
 }
 

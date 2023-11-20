@@ -9,9 +9,10 @@ function throttle<R, A extends any[]>(
         if (flag) return undefined
         const _fn = fn(...args)
         flag = true
+        throttleConfig.before()
         setTimeout(() => {
             flag = false
-            throttleConfig.effect()
+            throttleConfig.after()
         }, throttleConfig.delay)
         return _fn
     }
