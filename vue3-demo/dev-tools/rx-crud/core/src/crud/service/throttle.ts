@@ -1,19 +1,20 @@
-import {
-    ref,
-} from "vue"
-import type {Ref} from "vue"
+import { ThrottleConfig } from "@/crud/model/ThrottleConfig"
 
-function throttle<R, A extends any[]>(fn: (...args: A) => R | Promise<R>, delay: number = 3000): [(...args: A) => R | Promise<R> | undefined, Ref<boolean>]{
-    const disabledBtn:Ref<boolean> = ref(false)
+function throttle<R, A extends any[]>(
+    fn: (...args: A) => R | Promise<R>,
+    throttleConfig: ThrottleConfig): (...args: A) => R | Promise<R> | undefined {
+    let flag = false
 
-    return [(...args: A) => {
-        if (disabledBtn.value) return undefined
+    return (...args: A) => {
+        if (flag) return undefined
         const _fn = fn(...args)
-        disabledBtn.value = true
+        flag = true
         setTimeout(() => {
-            disabledBtn.value = false
-        }, delay)
+            flag = false
+            throttleConfig.effect()
+        }, throttleConfig.delay)
         return _fn
-    }, disabledBtn]
+    }
 }
+
 export { throttle }

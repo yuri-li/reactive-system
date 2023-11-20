@@ -10,6 +10,7 @@ import {
 } from "@/crud/model/cacheData/LastSubmittedData"
 import { ContainsInitData } from "@/crud/model/cacheData/ContainsInitData"
 import { isEmpty } from "@/crud/service/baseModel/isEmpty"
+import { ThrottleConfig } from "@/crud/model/ThrottleConfig"
 export {
     //1. 增删改查
     Create,
@@ -22,6 +23,7 @@ export {
     LastSubmittedData,
     ContainsInitData,
     StorageType,
+    ThrottleConfig,
 
     //3. 返回值
     DiffDetail,

@@ -1,15 +1,14 @@
 import type { StreamResponse } from "@/rsocket/model/rsocketTypes"
-import { requestResponse } from "@/rsocket/interaction/requestResponse"
-import { requestStream } from "@/rsocket/interaction/requestStream"
-import { fireAndForget } from "@/rsocket/interaction/fireAndForget"
-import { RSocketConfig } from "@/rsocket/util/connector"
+import { requestResponse } from "@/rsocket/service/requestResponse"
+import { requestStream } from "@/rsocket/service/requestStream"
+import { fireAndForget } from "@/rsocket/service/fireAndForget"
+import { RSocketConfig } from "@/rsocket/model/RSocketConfig"
 
 export {
     requestResponse,
     requestStream,
     fireAndForget,
 
-    //服务启动时，需要把配置信息存入session中
     RSocketConfig,
 }
 

@@ -1,7 +1,7 @@
 {
   "name": "rx-crud",
   "private": false,
-  "version": "0.1.3",
+  "version": "0.1.5",
   "license": "MIT",
   "author": "yuri <javaliyuanyuan@163.com> (https://github.com/yuri-li)",
   "main": "dist/rx-crud.mjs",

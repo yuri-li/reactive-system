@@ -4,11 +4,10 @@ import { defineConfig } from "vite"
 import { resolve } from "path"
 
 import Vue from "@vitejs/plugin-vue"
-import ViteYAML from "@modyfi/vite-plugin-yaml"
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [Vue(), ViteYAML()],
+    plugins: [Vue()],
     build: {
         target: "esnext",
         minify: false,

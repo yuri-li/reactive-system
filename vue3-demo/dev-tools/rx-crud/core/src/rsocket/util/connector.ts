@@ -5,20 +5,7 @@ import { WebsocketClientTransport } from "rsocket-websocket-client"
 import { RSocketConnector } from "rsocket-core"
 import { ErrorCodeException } from "@/globalException"
 import type { RSocket } from "rsocket-core/dist/RSocket"
-
-/**
- * 示例: {"protocol": "ws", "host": "localhost", "port": 7001, "mappingPath": "demo"}
- */
-class RSocketConfig {
-    protocol: "ws" | "wss" | undefined
-    host: string | undefined
-    port: number | undefined
-    mappingPath: string | undefined
-
-    public constructor(init?: Partial<RSocketConfig>) {
-        Object.assign(this, init)
-    }
-}
+import type { RSocketConfig } from "@/rsocket/model/RSocketConfig"
 
 class SingletonClient {
     rSocket: RSocket | undefined
@@ -66,5 +53,4 @@ async function createClient() {
 
 export {
     SingletonClient,
-    RSocketConfig,
 }

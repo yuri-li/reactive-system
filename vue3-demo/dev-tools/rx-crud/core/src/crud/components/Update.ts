@@ -1,19 +1,17 @@
 import type { FormInstance } from "element-plus"
 import type { DiffDetail } from "@/crud/model/DiffDetail"
-import type { Ref } from "vue"
 import { DiffUpdate } from "@/crud/service/diff/DiffUpdate"
 import { throttle } from "@/crud/service/throttle"
 import { toRaw } from "@/crud/components/Create"
+import { ThrottleConfig } from "@/crud/model/ThrottleConfig"
 
 class Update<T> {
     private readonly cache: T
-    disabledBtn: Ref<boolean>
 
-    constructor(_cache: T) {
+    constructor(_cache: T, throttleConfig: ThrottleConfig) {
         this.cache = toRaw(_cache)
-        const [_validate, _disabledBtn] = throttle(this.validate)
-        this.disabledBtn = _disabledBtn
-        this.validate = _validate as any
+        // @ts-ignore
+        this.validate = throttle(this.validate,throttleConfig)
     }
 
     private async validate(formRef: FormInstance) {

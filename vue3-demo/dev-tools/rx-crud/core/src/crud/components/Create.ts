@@ -2,10 +2,10 @@ import type { FormInstance } from "element-plus"
 import { Diff } from "@/crud/service/diff"
 import { OperationType } from "@/crud/model/OperationType"
 import { decodeDiffDetail } from "@/crud/model/DiffDetail"
-import type { Ref } from "vue"
 import { throttle } from "@/crud/service/throttle"
 import { LastSubmittedData } from "@/crud/model/cacheData/LastSubmittedData"
 import { ContainsInitData } from "@/crud/model/cacheData/ContainsInitData"
+import { ThrottleConfig } from "@/crud/model/ThrottleConfig"
 
 function toRaw<T>(value: T | LastSubmittedData<T> | ContainsInitData<T>) {
     if (value instanceof LastSubmittedData || value instanceof ContainsInitData) {
@@ -17,7 +17,6 @@ function toRaw<T>(value: T | LastSubmittedData<T> | ContainsInitData<T>) {
 
 abstract class Operator<T> {
     protected cache: T | LastSubmittedData<T> | ContainsInitData<T>
-    disabledBtn: Ref<boolean>
     protected allowDuplicate: boolean
 
     protected async validate(formRef: FormInstance) {
@@ -25,12 +24,11 @@ abstract class Operator<T> {
         })
     }
 
-    public constructor(_cache: T | LastSubmittedData<T> | ContainsInitData<T>, _allowDuplicate: boolean = false) {
+    public constructor(_cache: T | LastSubmittedData<T> | ContainsInitData<T>, throttleConfig: ThrottleConfig, _allowDuplicate: boolean = false) {
         this.cache = toRaw(_cache)
         this.allowDuplicate = _allowDuplicate
-        const [_validate, _disabledBtn] = throttle(this.validate)
-        this.disabledBtn = _disabledBtn
-        this.validate = _validate as any
+        // @ts-ignore
+        this.validate = throttle(this.validate, throttleConfig)
     }
 
     public clearCache() {

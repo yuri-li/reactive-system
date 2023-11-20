@@ -6,12 +6,13 @@ import { BusinessException } from "@/globalException"
 import { Operator } from "@/crud/components/Create"
 import type { LastSubmittedData } from "@/crud/model/cacheData/LastSubmittedData"
 import type { ContainsInitData } from "@/crud/model/cacheData/ContainsInitData"
+import { ThrottleConfig } from "@/crud/model/ThrottleConfig"
 
 class Read<T> extends Operator<T> {
     private readonly allowEmpty: boolean
 
-    constructor(_cache: T | LastSubmittedData<T> | ContainsInitData<T>, _allowDuplicate: boolean = false, _allowEmpty: boolean = false) {
-        super(_cache, _allowDuplicate)
+    constructor(_cache: T | LastSubmittedData<T> | ContainsInitData<T>, throttleConfig: ThrottleConfig, _allowDuplicate: boolean = false, _allowEmpty: boolean = false) {
+        super(_cache, throttleConfig, _allowDuplicate)
         this.allowEmpty = _allowEmpty
     }
 
